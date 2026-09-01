@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopEasy - India's Premier Online Store</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts for clean modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ==========================================
+       1. TOP PROMOTIONAL ANNOUNCEMENT BAR
+       ========================================== -->
+  <div class="top-announcement-bar">
+    <div class="announcement-content">
+      <div class="ticker-text">
+        <span>🎉 <strong>Mega Sale Live!</strong> Use coupon <code class="coupon-tag" onclick="copyCouponCode('SAVE10')">SAVE10</code> for 10% OFF, <code class="coupon-tag" onclick="copyCouponCode('SAVE200')">SAVE200</code> for ₹200 OFF, or <code class="coupon-tag" onclick="copyCouponCode('WELCOME15')">WELCOME15</code> for 15% OFF!</span>
+      </div>
+      <div class="announcement-links">
+        <button id="nav-track-btn-top" class="top-link-btn">📍 Track Order</button>
+        <span class="divider">|</span>
+        <button id="nav-return-btn-top" class="top-link-btn">🔄 Returns & Exchanges</button>
+        <span class="divider">|</span>
+        <button id="nav-account-btn-top" class="top-link-btn">👤 My Account</button>
+        <span class="divider">|</span>
+        <button id="nav-admin-btn-top" class="top-link-btn">📊 Admin Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. PRIMARY NAVIGATION BAR
+       ========================================== -->
+  <header class="navbar">
+    <div class="nav-container">
+      <!-- Brand Logo -->
+      <a href="#" class="brand" aria-label="ShopEasy Home" onclick="resetFilters(); return false;">
+        <span class="brand-icon">🛍️</span>
+        <div class="brand-text">
+          <span class="brand-title">ShopEasy</span>
+          <span class="brand-subtitle">Premium Store</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu">
+        <a href="#products-section" class="nav-link active" onclick="resetFilters()">Home</a>
+        <a href="#products-section" class="nav-link">Products</a>
+        <a href="#categories-section" class="nav-link">Categories</a>
+        <a href="javascript:void(0)" id="nav-orders-link" class="nav-link">My Orders</a>
+        <a href="javascript:void(0)" id="nav-wishlist-link" class="nav-link">Wishlist</a>
+        <a href="javascript:void(0)" id="nav-track-link" class="nav-link">Track</a>
+        <a href="javascript:void(0)" id="nav-return-link" class="nav-link">Returns</a>
+      </nav>
+
+      <!-- Real-Time Product Search Bar -->
+      <div class="nav-search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="catalog-search-input" placeholder="Search headphones, watches, phones, fashion..." aria-label="Search products">
+        <button id="clear-search-btn" class="clear-search-btn" style="display: none;" title="Clear search">&times;</button>
+      </div>
+
+      <!-- Quick Action Group -->
+      <div class="nav-actions">
+        <!-- Dark / Light Mode Toggle Button -->
+        <button id="theme-toggle-btn" class="nav-icon-btn theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <span id="theme-icon" class="theme-icon">🌙</span>
+        </button>
+
+        <!-- Wishlist Button -->
+        <button id="wishlist-toggle-btn" class="nav-icon-btn wishlist-nav-btn" title="View Wishlist" aria-label="View Wishlist">
+          <span class="btn-icon">❤️</span>
+          <span id="wishlist-count-badge" class="nav-count-badge">0</span>
+        </button>
+
+        <!-- Account Button -->
+        <button id="account-toggle-btn" class="nav-icon-btn account-nav-btn" title="Customer Account" aria-label="Account">
+          <span class="btn-icon">👤</span>
+          <span class="btn-text">Account</span>
+        </button>
+
+        <!-- Shopping Cart Button with Dynamic Badge -->
+        <button id="cart-toggle-btn" class="cart-btn" aria-label="View Shopping Bag">
+          <span class="cart-icon">🛒</span>
+          <span class="cart-btn-label">Bag</span>
+          <span id="cart-count-badge" class="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       3. HERO BANNER & SPECIAL OFFERS
+       ========================================== -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">⚡ Special Festive Season Offer</div>
+      <h1>Upgrade Your Lifestyle With Premium Tech & Fashion</h1>
+      <p>Discover top-rated smartphones, wireless audio, smart wearables, fashion, and home essentials with fast doorstep delivery.</p>
+      
+      <!-- Interactive Coupon Bar -->
+      <div class="hero-coupons-bar">
+        <div class="hero-coupon-pill" onclick="copyCouponCode('SAVE10')">
+          <span class="pill-code">SAVE10</span>
+          <span class="pill-desc">10% Off All Orders</span>
+        </div>
+        <div class="hero-coupon-pill" onclick="copyCouponCode('SAVE200')">
+          <span class="pill-code">SAVE200</span>
+          <span class="pill-desc">₹200 Off Orders ≥ ₹500</span>
+        </div>
+        <div class="hero-coupon-pill" onclick="copyCouponCode('WELCOME15')">
+          <span class="pill-code">WELCOME15</span>
+          <span class="pill-desc">15% Off New Orders</span>
+        </div>
+        <div class="hero-coupon-pill" onclick="copyCouponCode('FREESHIP')">
+          <span class="pill-code">FREESHIP</span>
+          <span class="pill-desc">Free Delivery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       4. POPULAR CATEGORIES TILES
+       ========================================== -->
+  <section id="categories-section" class="categories-section">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>Shop By Category</h2>
+        <p>Explore our wide selection of handpicked products</p>
+      </div>
+      <div class="category-cards-grid">
+        <div class="category-card" onclick="filterByCategory('Electronics')">
+          <div class="cat-icon-box">🎧</div>
+          <h4>Electronics</h4>
+          <span>Audio & Tech</span>
+        </div>
+        <div class="category-card" onclick="filterByCategory('Smartphones & Accessories')">
+          <div class="cat-icon-box">📱</div>
+          <h4>Smartphones & Accessories</h4>
+          <span>5G & Cases</span>
+        </div>
+        <div class="category-card" onclick="filterByCategory('Wearables')">
+          <div class="cat-icon-box">⌚</div>
+          <h4>Wearables</h4>
+          <span>Smart Watches</span>
+        </div>
+        <div class="category-card" onclick="filterByCategory('Fashion')">
+          <div class="cat-icon-box">👟</div>
+          <h4>Fashion</h4>
+          <span>Shoes & Apparel</span>
+        </div>
+        <div class="category-card" onclick="filterByCategory('Home & Lifestyle')">
+          <div class="cat-icon-box">🏡</div>
+          <h4>Home & Lifestyle</h4>
+          <span>Decor & Smart Home</span>
+        </div>
+        <div class="category-card" onclick="filterByCategory('Personal & Travel')">
+          <div class="cat-icon-box">✈️</div>
+          <h4>Personal & Travel</h4>
+          <span>Backpacks & Luggage</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       5. MAIN PRODUCT CATALOG
+       ========================================== -->
+  <main id="products-section" class="main-container">
+    <div class="catalog-header">
+      <div class="catalog-title-group">
+        <h2 id="catalog-heading">Explore All Products</h2>
+        <p id="product-count-text">Showing all items</p>
+      </div>
+
+      <!-- Catalog Controls: Sort & Filters -->
+      <div class="catalog-controls-bar">
+        <!-- Sort Dropdown -->
+        <div class="catalog-sort-wrapper">
+          <label for="catalog-sort-select" class="sort-label">Sort By:</label>
+          <select id="catalog-sort-select" class="catalog-sort-select" aria-label="Sort products">
+            <option value="featured">✨ Featured & Popular</option>
+            <option value="price-low">💰 Price: Low to High</option>
+            <option value="price-high">💎 Price: High to Low</option>
+            <option value="rating">★ Highest Rated</option>
+            <option value="newest">🔥 Newest Arrivals</option>
+            <option value="discount">🏷️ Biggest Discount</option>
+          </select>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="category-filters" id="category-filters">
+          <button class="filter-pill active" data-category="all">All Items</button>
+          <button class="filter-pill" data-category="Electronics">Electronics</button>
+          <button class="filter-pill" data-category="Smartphones & Accessories">Smartphones & Accessories</button>
+          <button class="filter-pill" data-category="Wearables">Wearables</button>
+          <button class="filter-pill" data-category="Fashion">Fashion</button>
+          <button class="filter-pill" data-category="Home & Lifestyle">Home & Lifestyle</button>
+          <button class="filter-pill" data-category="Personal & Travel">Personal & Travel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Grid Container (populated dynamically) -->
+    <div id="products-grid" class="products-grid">
+      <div class="loading-spinner-container">
+        <div class="spinner"></div>
+        <p>Loading catalog items...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================
+       6. SPECIAL OFFERS CALLOUT BANNER
+       ========================================== -->
+  <section class="special-offer-banner">
+    <div class="offer-banner-content">
+      <span class="offer-tag">🔥 Deal of the Day</span>
+      <h3>Free Express Delivery on All Orders Over ₹999</h3>
+      <p>Order today and enjoy doorstep delivery within 3-5 business days across India.</p>
+      <button class="offer-cta-btn" onclick="filterByCategory('all')">Shop Featured Deals &rarr;</button>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       7. SHOPPING CART DRAWER / SIDE PANEL
+       ========================================== -->
+  <div id="cart-drawer-overlay" class="drawer-overlay"></div>
+  <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping Cart Drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <h3>Shopping Bag</h3>
+        <span id="drawer-item-count" class="drawer-badge">0 items</span>
+      </div>
+      <button id="close-cart-btn" class="close-btn" aria-label="Close cart">&times;</button>
+    </div>
+
+    <!-- Cart Items List Container -->
+    <div id="cart-items-container" class="cart-items-list">
+      <!-- Rendered by app.js -->
+    </div>
+
+    <!-- Cart Footer & Coupon Section -->
+    <div class="cart-footer">
+      <!-- Coupon Application Box -->
+      <div class="cart-coupon-box">
+        <div class="coupon-input-group">
+          <input type="text" id="cart-coupon-input" placeholder="Enter coupon (e.g. SAVE10)" uppercase>
+          <button id="cart-apply-coupon-btn" class="apply-coupon-btn">Apply</button>
+        </div>
+        <div id="cart-coupon-message" class="coupon-status-msg" style="display: none;"></div>
+        <!-- Active Coupon Tag -->
+        <div id="cart-active-coupon-tag" class="active-coupon-badge" style="display: none;">
+          <span>🏷️ <strong id="active-coupon-name">SAVE10</strong> applied</span>
+          <button id="cart-remove-coupon-btn" class="remove-coupon-btn" title="Remove coupon">&times;</button>
+        </div>
+      </div>
+
+      <!-- Price Breakdown -->
+      <div class="cart-summary-row">
+        <span>Bag Subtotal</span>
+        <span id="cart-subtotal">₹0</span>
+      </div>
+      <div id="cart-discount-row" class="cart-summary-row discount-row" style="display: none;">
+        <span>Coupon Discount</span>
+        <span id="cart-discount-amount">-₹0</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Delivery Fee</span>
+        <span id="cart-delivery-charge" class="free-shipping">₹49</span>
+      </div>
+
+      <div class="cart-summary-divider"></div>
+      
+      <div class="cart-summary-row total-row">
+        <span>Total Payable</span>
+        <span id="cart-total-price">₹0</span>
+      </div>
+
+      <!-- Checkout Button -->
+      <button id="checkout-btn" class="checkout-btn" disabled>
+        <span>Proceed to Checkout</span>
+        <span class="btn-arrow">&rarr;</span>
+      </button>
+
+      <button id="clear-cart-btn" class="clear-cart-btn" style="display: none;">
+        Clear Entire Bag
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================
+       8. WISHLIST MODAL
+       ========================================== -->
+  <div id="wishlist-modal" class="modal-overlay">
+    <div class="modal-box wishlist-modal-box">
+      <button id="close-wishlist-modal-btn" class="modal-close-btn" aria-label="Close wishlist">&times;</button>
+      
+      <div class="modal-header">
+        <span class="modal-icon">❤️</span>
+        <h3>My Wishlist</h3>
+        <p>Your saved favorites and items you love.</p>
+      </div>
+
+      <div id="wishlist-items-container" class="wishlist-items-grid">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       9. MY ORDERS MODAL / PAGE
+       ========================================== -->
+  <div id="orders-modal" class="modal-overlay">
+    <div class="modal-box orders-modal-box">
+      <button id="close-orders-modal-btn" class="modal-close-btn" aria-label="Close orders modal">&times;</button>
+      
+      <div class="modal-header">
+        <span class="modal-icon">📋</span>
+        <h3>My Orders</h3>
+        <p>Review past purchases, shipment statuses, and return items.</p>
+      </div>
+
+      <div id="orders-list-container" class="orders-list-container">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       10. CUSTOMER ACCOUNT MODAL
+       ========================================== -->
+  <div id="account-modal" class="modal-overlay">
+    <div class="modal-box account-modal-box">
+      <button id="close-account-modal-btn" class="modal-close-btn" aria-label="Close account modal">&times;</button>
+      
+      <div class="modal-header">
+        <span class="modal-icon">👤</span>
+        <h3>Customer Profile & Settings</h3>
+        <p>Manage your saved addresses and quick order preferences.</p>
+      </div>
+
+      <div class="account-profile-card">
+        <div class="account-avatar">👤</div>
+        <div class="account-info">
+          <h4 id="acc-display-name">Rahul Sharma</h4>
+          <p id="acc-display-phone">+91 98765 43210</p>
+          <p id="acc-display-email">rahul.sharma@example.com</p>
+        </div>
+      </div>
+
+      <!-- Quick Metrics -->
+      <div class="account-stats-row">
+        <div class="acc-stat-box" onclick="openOrdersModal()">
+          <strong id="acc-orders-count">0</strong>
+          <span>Orders Placed</span>
+        </div>
+        <div class="acc-stat-box" onclick="openWishlistModal()">
+          <strong id="acc-wishlist-count">0</strong>
+          <span>Saved Wishlist</span>
+        </div>
+        <div class="acc-stat-box" onclick="openReturnModal()">
+          <strong id="acc-returns-count">0</strong>
+          <span>Active Returns</span>
+        </div>
+      </div>
+
+      <!-- Saved Address Editor -->
+      <div class="saved-address-section">
+        <h4>Saved Delivery Address</h4>
+        <form id="save-address-form" class="checkout-form">
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="acc-name">Full Name</label>
+              <input type="text" id="acc-name" value="Rahul Sharma" required>
+            </div>
+            <div class="form-group flex-1">
+              <label for="acc-phone">Phone</label>
+              <input type="tel" id="acc-phone" value="9876543210" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="acc-address">Address (Flat/Street)</label>
+            <input type="text" id="acc-address" value="Flat 402, Green Glen Layout, Outer Ring Road" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="acc-city">City</label>
+              <input type="text" id="acc-city" value="Bengaluru" required>
+            </div>
+            <div class="form-group flex-1">
+              <label for="acc-state">State</label>
+              <input type="text" id="acc-state" value="Karnataka" required>
+            </div>
+            <div class="form-group flex-1">
+              <label for="acc-pincode">Pincode</label>
+              <input type="text" id="acc-pincode" value="560103" required>
+            </div>
+          </div>
+          <button type="submit" class="save-btn">Save Address Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       11. ADMIN DASHBOARD MODAL (Frontend-Only)
+       ========================================== -->
+  <div id="admin-modal" class="modal-overlay">
+    <div class="modal-box admin-modal-box">
+      <button id="close-admin-modal-btn" class="modal-close-btn" aria-label="Close admin dashboard">&times;</button>
+      
+      <div class="modal-header">
+        <span class="modal-icon">📊</span>
+        <h3>ShopEasy Store Administration</h3>
+        <p>Live inventory, revenue overview, order fulfillment, and returns tracker.</p>
+      </div>
+
+      <!-- Key Metrics Row -->
+      <div class="admin-metrics-grid">
+        <div class="metric-card">
+          <span class="metric-label">Total Revenue</span>
+          <strong id="admin-total-sales" class="metric-val">₹0</strong>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Orders Placed</span>
+          <strong id="admin-total-orders" class="metric-val">0</strong>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Active Catalog</span>
+          <strong id="admin-total-products" class="metric-val">10</strong>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Return Requests</span>
+          <strong id="admin-total-returns" class="metric-val">0</strong>
+        </div>
+      </div>
+
+      <!-- Admin Tabs -->
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" data-tab="orders-tab">Recent Orders</button>
+        <button class="admin-tab-btn" data-tab="inventory-tab">Catalog Inventory</button>
+        <button class="admin-tab-btn" data-tab="returns-tab">Return Requests</button>
+      </div>
+
+      <!-- Tab 1: Recent Orders Table -->
+      <div id="orders-tab" class="admin-tab-content active">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Payment</th>
+                <th>Shipment Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-orders-tbody">
+              <!-- Rendered by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 2: Products Inventory Table -->
+      <div id="inventory-tab" class="admin-tab-content">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody id="admin-products-tbody">
+              <!-- Rendered by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3: Returns Table -->
+      <div id="returns-tab" class="admin-tab-content">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Return ID</th>
+                <th>Order ID</th>
+                <th>Item</th>
+                <th>Reason</th>
+                <th>Refund</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="admin-returns-tbody">
+              <!-- Rendered by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       12. CHECKOUT & PAYMENT MODAL
+       ========================================== -->
+  <div id="checkout-modal" class="modal-overlay">
+    <div class="modal-box">
+      <button id="close-modal-btn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      
+      <!-- STEP 1: Shipping Address -->
+      <div id="checkout-form-step">
+        <div class="modal-header">
+          <span class="modal-icon">📦</span>
+          <h3>Shipping & Delivery Address</h3>
+          <p>Please enter your delivery details to proceed to payment.</p>
+        </div>
+
+        <form id="checkout-form" class="checkout-form">
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="cust-name">Full Name *</label>
+              <input type="text" id="cust-name" placeholder="e.g. Rahul Sharma" required value="Rahul Sharma">
+            </div>
+            <div class="form-group flex-1">
+              <label for="cust-phone">Mobile Number *</label>
+              <input type="tel" id="cust-phone" placeholder="e.g. 9876543210" required value="9876543210">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cust-email">Email Address *</label>
+            <input type="email" id="cust-email" placeholder="e.g. rahul.sharma@example.com" required value="rahul.sharma@example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="cust-address">Delivery Address (House / Flat / Street) *</label>
+            <input type="text" id="cust-address" placeholder="e.g. Flat 402, Green Glen Layout, Bellandur" required value="Flat 402, Green Glen Layout, Outer Ring Road">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="cust-city">City *</label>
+              <input type="text" id="cust-city" placeholder="e.g. Bengaluru" required value="Bengaluru">
+            </div>
+            <div class="form-group flex-1">
+              <label for="cust-state">State *</label>
+              <input type="text" id="cust-state" placeholder="e.g. Karnataka" required value="Karnataka">
+            </div>
+            <div class="form-group flex-1">
+              <label for="cust-pincode">PIN Code *</label>
+              <input type="text" id="cust-pincode" placeholder="e.g. 560103" required value="560103">
+            </div>
+          </div>
+
+          <!-- Checkout Order Preview Breakdown -->
+          <div class="checkout-order-preview">
+            <div class="preview-row">
+              <span>Bag Subtotal:</span>
+              <strong id="modal-subtotal">₹0</strong>
+            </div>
+            <div id="modal-discount-row" class="preview-row discount-row" style="display: none;">
+              <span>Coupon Discount:</span>
+              <strong id="modal-discount">-₹0</strong>
+            </div>
+            <div class="preview-row">
+              <span>Delivery Charges:</span>
+              <span id="modal-delivery-fee" class="free-shipping">₹0</span>
+            </div>
+            <div class="preview-divider"></div>
+            <div class="preview-row total-highlight">
+              <span>Grand Total:</span>
+              <strong id="modal-order-total">₹0</strong>
+            </div>
+          </div>
+
+          <!-- Dynamic Expected Delivery Banner -->
+          <div class="expected-delivery-notice">
+            <span class="delivery-icon">🚚</span>
+            <div>
+              <strong>Expected Delivery</strong>
+              <p>Expected by <span id="checkout-expected-date" class="delivery-date-text">-</span></p>
+            </div>
+          </div>
+
+          <button type="submit" id="proceed-to-pay-btn" class="pay-now-btn">
+            <span>Proceed to Payment</span>
+            <span id="btn-pay-total-badge">₹0</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- STEP 2: Payment Method Selection -->
+      <div id="payment-selection-step" style="display: none;">
+        <div class="modal-header">
+          <span class="modal-icon">💳</span>
+          <h3>Choose Payment Method</h3>
+          <p>Total Payable: <strong id="payment-amount-display" class="payable-highlight">₹0</strong></p>
+        </div>
+
+        <div class="payment-methods-grid">
+          <!-- Google Pay -->
+          <button type="button" class="payment-option-btn active-payment" data-method="Google Pay" data-scheme="gpay://upi/pay">
+            <div class="payment-option-icon gpay-icon">
+              <span>🔵</span>
+            </div>
+            <div class="payment-option-info">
+              <span class="payment-name">Google Pay</span>
+              <span class="payment-desc">Pay instantly using GPay UPI</span>
+            </div>
+            <span class="payment-select-radio">✓</span>
+          </button>
+
+          <!-- PhonePe -->
+          <button type="button" class="payment-option-btn" data-method="PhonePe" data-scheme="phonepe://pay">
+            <div class="payment-option-icon phonepe-icon">
+              <span>🟣</span>
+            </div>
+            <div class="payment-option-info">
+              <span class="payment-name">PhonePe</span>
+              <span class="payment-desc">Pay using PhonePe UPI</span>
+            </div>
+            <span class="payment-select-radio">○</span>
+          </button>
+
+          <!-- Paytm -->
+          <button type="button" class="payment-option-btn" data-method="Paytm" data-scheme="paytmmp://pay">
+            <div class="payment-option-icon paytm-icon">
+              <span>🔷</span>
+            </div>
+            <div class="payment-option-info">
+              <span class="payment-name">Paytm</span>
+              <span class="payment-desc">Pay with Paytm UPI & Wallet</span>
+            </div>
+            <span class="payment-select-radio">○</span>
+          </button>
+
+          <!-- Generic UPI -->
+          <button type="button" class="payment-option-btn" data-method="UPI" data-scheme="upi://pay">
+            <div class="payment-option-icon upi-icon">
+              <span>⚡</span>
+            </div>
+            <div class="payment-option-info">
+              <span class="payment-name">Any UPI App</span>
+              <span class="payment-desc">BHIM, CRED, Amazon Pay, or any UPI ID</span>
+            </div>
+            <span class="payment-select-radio">○</span>
+          </button>
+
+          <!-- Cash on Delivery -->
+          <button type="button" class="payment-option-btn" data-method="Cash on Delivery" data-scheme="cod">
+            <div class="payment-option-icon cod-icon">
+              <span>💵</span>
+            </div>
+            <div class="payment-option-info">
+              <span class="payment-name">Cash on Delivery (COD)</span>
+              <span class="payment-desc">Pay with cash/UPI upon physical delivery (+₹40 Handling Fee)</span>
+            </div>
+            <span class="payment-select-radio">○</span>
+          </button>
+        </div>
+
+        <!-- COD Confirmation Notice -->
+        <div id="cod-notice-box" class="cod-alert-box" style="display: none;">
+          <div class="alert-icon">💵</div>
+          <div class="alert-content">
+            <strong>Cash on Delivery Selected:</strong>
+            <p>A nominal handling charge of ₹40 has been added. Please keep cash or UPI ready at the time of delivery.</p>
+          </div>
+        </div>
+
+        <!-- Online Payment App Redirection Alert -->
+        <div id="payment-device-alert" class="device-alert-box" style="display: none;">
+          <div class="alert-icon">📱</div>
+          <div class="alert-content">
+            <strong>Payment App Notice:</strong>
+            <p id="device-alert-msg">Payment app redirection is active on supported mobile devices. You can confirm and place your order securely below.</p>
+          </div>
+        </div>
+
+        <!-- Order Summary Breakdown in Payment Step -->
+        <div class="payment-order-summary-card">
+          <div class="summary-line">
+            <span>Items Subtotal:</span>
+            <span id="pay-subtotal">₹0</span>
+          </div>
+          <div id="pay-discount-line" class="summary-line discount-row" style="display: none;">
+            <span>Coupon Discount:</span>
+            <span id="pay-discount">-₹0</span>
+          </div>
+          <div class="summary-line">
+            <span>Delivery Fee:</span>
+            <span id="pay-delivery">₹0</span>
+          </div>
+          <div id="pay-cod-line" class="summary-line" style="display: none;">
+            <span>COD Handling Charge:</span>
+            <span id="pay-cod-charge">+₹40</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-line final-total">
+            <span>Total Payable:</span>
+            <strong id="pay-final-total">₹0</strong>
+          </div>
+        </div>
+
+        <!-- Pay Now / Confirm Order Button -->
+        <button type="button" id="confirm-payment-btn" class="simulate-pay-btn">
+          <span>Pay Now & Confirm Order</span>
+          <span class="btn-arrow">&rarr;</span>
+        </button>
+
+        <button type="button" id="back-to-details-btn" class="back-link-btn">
+          &larr; Back to Shipping Address
+        </button>
+      </div>
+
+      <!-- STEP 3: Order Confirmation & Receipt -->
+      <div id="order-success-step" class="order-success-step" style="display: none;">
+        <div class="success-icon">🎉</div>
+        <h3 id="order-success-title">Order Placed Successfully!</h3>
+        <p id="order-success-message" class="success-message">Thank you for your purchase. Your order has been placed and is being prepared.</p>
+        
+        <!-- Order Receipt Card -->
+        <div class="receipt-card">
+          <div class="receipt-row">
+            <span>Order ID:</span>
+            <strong id="receipt-order-id">ORD-20260901-XXXX</strong>
+          </div>
+          <div class="receipt-row">
+            <span>Expected Delivery:</span>
+            <strong id="receipt-delivery-date" class="delivery-highlight">-</strong>
+          </div>
+          <div class="receipt-row">
+            <span>Payment Mode:</span>
+            <span id="receipt-payment-method" class="receipt-tag">Google Pay (UPI)</span>
+          </div>
+          <div class="receipt-row">
+            <span>Payment Status:</span>
+            <span id="receipt-payment-status" class="receipt-tag success-tag">PAID ONLINE</span>
+          </div>
+          <div class="receipt-row">
+            <span>Order Date & Time:</span>
+            <span id="receipt-date">-</span>
+          </div>
+          <div class="receipt-row">
+            <span>Total Items:</span>
+            <span id="receipt-item-count">0 items</span>
+          </div>
+          <div class="receipt-divider"></div>
+          <div class="receipt-row total">
+            <span>Total Amount:</span>
+            <strong id="receipt-total">₹0</strong>
+          </div>
+        </div>
+
+        <!-- Action Buttons on Receipt -->
+        <div class="receipt-actions-group">
+          <button id="receipt-track-btn" class="track-order-action-btn">
+            📍 Track This Order Now
+          </button>
+          <button id="continue-shopping-btn" class="continue-btn">
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       13. ORDER TRACKING MODAL
+       ========================================== -->
+  <div id="tracking-modal" class="modal-overlay">
+    <div class="modal-box tracking-modal-box">
+      <button id="close-tracking-modal-btn" class="modal-close-btn" aria-label="Close tracking modal">&times;</button>
+      
+      <div class="modal-header">
+        <span class="modal-icon">📍</span>
+        <h3>Live Order Tracking</h3>
+        <p>Enter your Order ID to view real-time shipment milestones.</p>
+      </div>
+
+      <!-- Order ID Search Input -->
+      <div class="tracking-search-bar">
+        <input type="text" id="tracking-order-input" placeholder="e.g. ORD-20260901-1234" uppercase>
+        <button id="tracking-lookup-btn" class="lookup-btn">Track Order</button>
+      </div>
+
+      <!-- Tracking Results Container -->
+      <div id="tracking-results-container" class="tracking-results">
+        <div class="empty-tracking-state">
+          <p>Please enter an Order ID or place an order to view the shipment timeline.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       14. PRODUCT RETURN REQUEST MODAL
+       ========================================== -->
+  <div id="return-modal" class="modal-overlay">
+    <div class="modal-box return-modal-box">
+      <button id="close-return-modal-btn" class="modal-close-btn" aria-label="Close return modal">&times;</button>
+      
+      <div id="return-form-step">
+        <div class="modal-header">
+          <span class="modal-icon">🔄</span>
+          <h3>Initiate Product Return</h3>
+          <p>7-day doorstep return and replacement policy.</p>
+        </div>
+
+        <form id="return-form" class="checkout-form">
+          <div class="form-group">
+            <label for="return-order-select">Select Placed Order *</label>
+            <select id="return-order-select" required>
+              <option value="">-- Select Completed Order --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="return-product-select">Select Item to Return *</label>
+            <select id="return-product-select" required disabled>
+              <option value="">-- First select an order --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="return-reason-select">Reason for Return *</label>
+            <select id="return-reason-select" required>
+              <option value="">-- Choose Reason --</option>
+              <option value="Product defective/damaged">Product defective/damaged</option>
+              <option value="Wrong product received">Wrong product received</option>
+              <option value="Product missing parts">Product missing parts</option>
+              <option value="Product not as described">Product not as described</option>
+              <option value="Size or fit issue">Size or fit issue</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="return-comments">Additional Details (Optional)</label>
+            <textarea id="return-comments" rows="3" placeholder="Describe the issue with the item..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="return-refund-mode">Preferred Refund / Resolution Mode</label>
+            <select id="return-refund-mode">
+              <option value="Original Payment Method / UPI">Refund to Original Payment Method / UPI</option>
+              <option value="Store Credit / Wallet">Instant Store Credit</option>
+              <option value="Replacement Item">Direct Replacement</option>
+            </select>
+          </div>
+
+          <button type="submit" id="submit-return-btn" class="confirm-order-btn">
+            Submit Return Request
+          </button>
+        </form>
+      </div>
+
+      <!-- Return Request Success Confirmation Step -->
+      <div id="return-success-step" class="order-success-step" style="display: none;">
+        <div class="success-icon">✅</div>
+        <h3>Return Request Submitted</h3>
+        <p class="success-message">Return request submitted successfully. Our courier agent will contact you for doorstep pickup.</p>
+        
+        <div class="receipt-card">
+          <div class="receipt-row">
+            <span>Return ID:</span>
+            <strong id="receipt-return-id">RET-123456</strong>
+          </div>
+          <div class="receipt-row">
+            <span>Order ID:</span>
+            <strong id="receipt-return-order-id">ORD-20260901-XXXX</strong>
+          </div>
+          <div class="receipt-row">
+            <span>Item:</span>
+            <span id="receipt-return-item">-</span>
+          </div>
+          <div class="receipt-row">
+            <span>Reason:</span>
+            <span id="receipt-return-reason">-</span>
+          </div>
+          <div class="receipt-row">
+            <span>Pickup Schedule:</span>
+            <strong class="delivery-highlight">Within 2 business days</strong>
+          </div>
+          <div class="receipt-divider"></div>
+          <div class="receipt-row total">
+            <span>Estimated Refund:</span>
+            <strong id="receipt-return-amount">₹0</strong>
+          </div>
+        </div>
+
+        <!-- 5-Step Return Timeline -->
+        <div class="return-timeline-box">
+          <h5>Return Progress Timeline:</h5>
+          <div class="tracking-timeline">
+            <div class="timeline-step completed">
+              <div class="step-node">✓</div>
+              <div class="step-content">
+                <strong>Return Requested</strong>
+                <p>Return request registered in system</p>
+              </div>
+            </div>
+            <div class="timeline-step current">
+              <div class="step-node">●</div>
+              <div class="step-content">
+                <strong>Under Review</strong>
+                <p>Merchant review in progress</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-node">3</div>
+              <div class="step-content">
+                <strong>Approved</strong>
+                <p>Return approved for doorstep pickup</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-node">4</div>
+              <div class="step-content">
+                <strong>Pickup Scheduled</strong>
+                <p>Courier agent assigned for pickup</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-node">5</div>
+              <div class="step-content">
+                <strong>Refund / Replacement</strong>
+                <p>Refund initiated to your payment method</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button id="close-return-success-btn" class="continue-btn" style="margin-top: 1rem;">
+          Back to Store
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       15. TOAST NOTIFICATIONS CONTAINER
+       ========================================== -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ==========================================
+       16. MODERN E-COMMERCE FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-col brand-col">
+        <div class="brand">
+          <span class="brand-icon">🛍️</span>
+          <span class="brand-title">ShopEasy</span>
+        </div>
+        <p>India's leading destination for quality electronics, smartphones, audio gear, fashion, and everyday essentials.</p>
+        <div class="trust-badges">
+          <span>🔒 100% Secure Payments</span>
+          <span>⚡ Fast Pan-India Shipping</span>
+          <span>🔄 7-Day Easy Doorstep Returns</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="openTrackingModal()">Track Your Order</a></li>
+          <li><a href="javascript:void(0)" onclick="openOrdersModal()">My Orders</a></li>
+          <li><a href="javascript:void(0)" onclick="openWishlistModal()">My Wishlist</a></li>
+          <li><a href="javascript:void(0)" onclick="openReturnModal()">Return & Exchange</a></li>
+          <li><a href="javascript:void(0)" onclick="openAccountModal()">Account Settings</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Top Categories</h4>
+        <ul>
+          <li><a href="#products-section" onclick="filterByCategory('Electronics')">Electronics & Audio</a></li>
+          <li><a href="#products-section" onclick="filterByCategory('Smartphones & Accessories')">Smartphones & Accessories</a></li>
+          <li><a href="#products-section" onclick="filterByCategory('Wearables')">Smart Fitness Watches</a></li>
+          <li><a href="#products-section" onclick="filterByCategory('Fashion')">Footwear & Apparel</a></li>
+          <li><a href="#products-section" onclick="filterByCategory('Home & Lifestyle')">Home, Kitchen & Decor</a></li>
+          <li><a href="#products-section" onclick="filterByCategory('Personal & Travel')">Travel Gear & Luggage</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Store Administration</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="openAdminModal()">📊 Admin Dashboard</a></li>
+          <li><a href="javascript:void(0)" onclick="toggleTheme()">🌓 Toggle Dark / Light Theme</a></li>
+          <li><a href="javascript:void(0)" onclick="showToast('Customer Support: support@shopeasy.in (Mon-Sat 9AM-8PM)', '📞')">Help Center</a></li>
+        </ul>
+        <div class="payment-badges-row" style="margin-top: 1rem;">
+          <span class="pay-badge">GPay</span>
+          <span class="pay-badge">PhonePe</span>
+          <span class="pay-badge">Paytm</span>
+          <span class="pay-badge">UPI</span>
+          <span class="pay-badge">COD</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 ShopEasy Retail Private Limited. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#products-section">Products</a>
+        <span>&bull;</span>
+        <a href="javascript:void(0)" onclick="openTrackingModal()">Track Order</a>
+        <span>&bull;</span>
+        <a href="javascript:void(0)" onclick="openReturnModal()">Returns</a>
+        <span>&bull;</span>
+        <a href="javascript:void(0)" onclick="openAdminModal()">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript Application -->
+  <script src="app.js"></script>
+</body>
+</html>
