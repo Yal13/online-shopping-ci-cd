@@ -1,17 +1,19 @@
 {
   "name": "online-shopping-backend",
   "version": "1.0.0",
-  "description": "Simple Express backend for Online Shopping College Project",
+  "description": "Express REST API backend for ShopEasy Online Shopping",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test": "node --test"
   },
   "keywords": [
     "express",
     "ecommerce",
     "online-shopping",
-    "college-project"
+    "rest-api",
+    "ci-cd"
   ],
   "author": "",
   "license": "ISC",

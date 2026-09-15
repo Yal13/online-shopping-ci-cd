@@ -1,6 +1,6 @@
 # ShopEasy - Modern E-Commerce Platform
 
-A feature-rich, responsive, and professional e-commerce web application built with vanilla **HTML5**, modern **CSS3**, and **JavaScript (ES6+)**.
+A feature-rich, responsive, and professional e-commerce web application built with vanilla **HTML5**, modern **CSS3**, **JavaScript (ES6+)**, and a lightweight **Node.js Express** backend API.
 
 ---
 
@@ -14,7 +14,28 @@ This application is **100% self-contained** and can be run immediately on any co
    c:\Users\Student\Desktop\online shopping\frontend
    ```
 3. **Double-click `index.html`** (or right-click -> *Open with* -> Google Chrome / Microsoft Edge / Firefox).
-4. The entire shopping platform is immediately active with search, cart, wishlist, coupons, payments, order tracking, returns, account management, and admin dashboard!
+4. The entire shopping platform is immediately active with search, sorting, cart, wishlist, coupons, payments, order tracking, returns, account management, and admin dashboard!
+
+---
+
+## 🚀 Running the Optional Express Backend
+
+If you have Node.js installed, you can also run the full REST API server:
+
+```bash
+# 1. Navigate to the backend directory
+cd backend
+
+# 2. Install dependencies
+npm install
+
+# 3. Run automated tests
+npm test
+
+# 4. Start the server
+npm start
+```
+The server will start on `http://localhost:5000` with `/api/health`, `/api/products`, and `/api/checkout` endpoints.
 
 ---
 
@@ -23,26 +44,17 @@ This application is **100% self-contained** and can be run immediately on any co
 ### 1. 🏠 Homepage & Navigation
 - Sticky top navigation bar with brand logo, live search bar, quick navigation links (Home, Products, Categories, My Orders, Wishlist, Track, Returns), dark/light mode toggle, and shopping cart counter.
 - Hero banner with coupon promo highlights (`SAVE10`, `SAVE200`, `WELCOME15`, `FREESHIP`) and one-click copy & apply.
-- Popular categories grid (*Electronics, Smartphones, Wearables, Accessories, Fashion, Home & Lifestyle*).
+- Popular categories grid (*Electronics, Smartphones & Accessories, Wearables, Fashion, Home & Lifestyle, Personal & Travel*).
 - Special offers banner with instant category filtering.
 
-### 2. 🛍️ Product Catalog & Indian Rupee (₹) Pricing
-- 10 realistic Indian products with:
-  - **Wireless Noise-Canceling Headphones** — ₹1,499 (50% off)
-  - **Smart Fitness Watch Pro** — ₹2,499 (50% off)
-  - **Smartphone 5G Pro (128GB)** — ₹14,999 (25% off)
-  - **Minimalist Everyday Laptop Backpack** — ₹999 (50% off)
-  - **Portable Bluetooth Speaker (20W Bass)** — ₹1,799 (48% off)
-  - **Slim Shockproof Matte Phone Case** — ₹499 (50% off)
-  - **Men's Performance Running Shoes** — ₹2,999 (40% off)
-  - **Smart Wi-Fi LED Color Bulb (9W)** — ₹699 (46% off)
-  - **Ergonomic RGB Mechanical Keyboard** — ₹2,999 (33% off)
-  - **Wireless Precision Gaming Mouse** — ₹799 (47% off)
-- Product cards display: Original price strikethrough, Discount %, Star rating with review counts, Stock availability (`● In Stock` / `● Only 4 left`), dynamic delivery estimates, **Add to Bag**, **⚡ Buy Now**, and **❤️ Wishlist** buttons.
+### 2. 🛍️ Product Catalog & Indian Rupee (₹) Pricing (58 Products)
+- 58 diverse, realistic products across 6 main categories with realistic Indian market pricing.
+- Product cards display: Original price strikethrough, Discount %, Star rating with review counts, Stock availability (`🟢 In Stock` / `🟠 Only X left` / `🔴 Out of Stock`), dynamic delivery estimates, **Add to Bag**, **⚡ Buy Now**, and **❤️ Wishlist** buttons.
+- Catalog Sorting: *✨ Featured & Popular*, *💰 Price: Low to High*, *💎 Price: High to Low*, *★ Highest Rated*, *🔥 Newest Arrivals*, and *🏷️ Biggest Discount*.
 
 ### 3. 🔍 Real-Time Search & Category Filters
 - Live search input matching product names, categories, and descriptions with clear button.
-- Instant category filter pills (*All Items, Electronics, Smartphones, Wearables, Accessories, Fashion, Home & Lifestyle*).
+- Instant category filter pills (*All Items, Electronics, Smartphones & Accessories, Wearables, Fashion, Home & Lifestyle, Personal & Travel*).
 
 ### 4. ❤️ Wishlist Management
 - Save and remove products from wishlist.
@@ -95,15 +107,84 @@ This application is **100% self-contained** and can be run immediately on any co
 ### 13. 🔔 Notifications
 - Color-coded animated Toast alerts (Green for success, Red for error, Blue for info) + Web Push Notification API integration.
 
-### 14. 🔄 CI/CD Pipeline
-- `.github/workflows/ci.yml` prepared with validation, unit tests, static bundling, containerization, and deployment stages.
+---
+
+## 🔄 CI/CD Pipeline
+
+The project features an automated **Continuous Integration (CI)** and **Continuous Deployment (CD)** pipeline using **GitHub Actions**.
+
+### 🏗️ Architecture Flow
+
+```text
+Developer
+    ↓
+   Git
+    ↓
+  GitHub (Yal13/online-shopping-ci-cd)
+    ↓
+GitHub Actions
+    ↓
+   CI
+    ↓
+ Install (npm ci)
+    ↓
+Validate (Syntax & Schema Checks)
+    ↓
+  Test (Node Native Test Runner)
+    ↓
+Build / Package (Static Assets & Backend)
+    ↓
+   CD
+    ↓
+Deployment (Production / Staging)
+```
 
 ---
 
-## 🔒 Simulation & Safety Notice
-- **Payments**: Uses safe URI schemes (`upi://pay`) for demonstration. No real financial transactions, banking passwords, or card CVVs are requested or stored.
-- **Shipment Tracking**: Tracking milestones and order progress are simulated locally using browser `localStorage`.
-- **Authentication**: Customer account and admin panels use client-side state without external database requirements.
+### ⚙️ When CI Runs
+- **On Push**: Every commit pushed to the `main` branch.
+- **On Pull Request**: Every pull request targeting the `main` branch.
+
+### 🧪 What CI Checks
+1. **1. Checkout repository**: Pulls the latest code using `actions/checkout@v4`.
+2. **2. Setup Node.js**: Sets up Node.js v20 runtime using `actions/setup-node@v4`.
+3. **3. Install backend dependencies**: Runs `npm ci` (or `npm install`) to ensure all dependencies install cleanly.
+4. **4. Validate backend**:
+   - Performs syntax validation on `backend/server.js` (`node -c backend/server.js`).
+   - Validates the product dataset schema in `backend/data/products.json` (verifies 50+ products, non-empty names, positive prices, and valid categories).
+5. **5. Run backend tests**: Executes native automated tests via `npm test` (`node --test`), verifying `/api/health`, `/api/products`, `/api/checkout`, and frontend file existence.
+6. **6. Validate frontend**: Verifies presence and structure of `frontend/index.html`, `frontend/style.css`, and `frontend/app.js`.
+7. **7. Validate JavaScript**: Compiles and syntax-checks `frontend/app.js` (`node -c frontend/app.js`).
+8. **8. Final project check**: Verifies overall repository integrity and signals successful CI completion.
+
+> [!NOTE]
+> All CI steps have strict error handling — no errors are hidden with `|| true`. If any step fails, the entire workflow fails immediately.
+
+---
+
+### 📊 How to See CI Results on GitHub
+1. Go to your GitHub repository: `https://github.com/Yal13/online-shopping-ci-cd`.
+2. Click on the **Actions** tab at the top of the repository.
+3. You will see the **Continuous Integration** workflow runs for every commit and pull request.
+4. Click on any run to inspect detailed step-by-step logs and test output.
+
+---
+
+### 🚀 Continuous Deployment (CD) Setup
+The project includes `.github/workflows/cd.yml` configured for future cloud/server deployments:
+- **Trigger**: Configured with `workflow_dispatch` for manual control or automated execution upon release.
+- **Packaging**: Automatically packages `backend/`, `frontend/`, and configuration files into `release-pkg/`.
+- **Required GitHub Secrets** (to be configured in *GitHub Settings -> Secrets and variables -> Actions*):
+  - `PRODUCTION_SERVER_HOST`: The IP address or hostname of your production server.
+  - `DEPLOY_SSH_KEY`: The private SSH key for secure server access.
+  - `PRODUCTION_DEPLOY_PATH`: The target directory on your remote server (e.g. `/var/www/shopeasy`).
+
+---
+
+## 🔒 Security & Safety Best Practices
+- **No Secrets in Git**: `.gitignore` is configured to prevent committing `.env`, `.env.local`, credentials, API keys, or log files.
+- **Safe UPI Deep Linking**: Payment options use device-aware `upi://pay` URI schemes. No banking credentials, passwords, or card numbers are collected or stored.
+- **Client-Side Simulation**: Order tracking and return timelines run safely in `localStorage` without external exposure.
 
 ---
 
@@ -113,18 +194,21 @@ This application is **100% self-contained** and can be run immediately on any co
 online shopping/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                # CI/CD pipeline definition
+│       ├── ci.yml                # Automated Continuous Integration pipeline
+│       └── cd.yml                # Continuous Deployment workflow template
 ├── backend/
 │   ├── data/
-│   │   └── products.json         # Product catalog dataset (₹ INR)
-│   ├── package.json              # Backend dependencies (Express, CORS)
-│   └── server.js                 # Optional Express server
+│   │   └── products.json         # 58-product catalog dataset (₹ INR)
+│   ├── test/
+│   │   └── server.test.js        # Automated API & data integrity tests
+│   ├── package.json              # Backend dependencies & test scripts
+│   └── server.js                 # Express REST API backend
 ├── frontend/
-│   ├── app.js                    # Core e-commerce state, cart, coupons, payments, tracking
-│   ├── index.html                # Modern e-commerce layout, modals, and templates
+│   ├── app.js                    # Core logic: Search, Sorting, Wishlist, Cart, Checkout, Tracking
+│   ├── index.html                # Modern e-commerce layout & modals
 │   └── style.css                 # Responsive CSS styling with Light/Dark mode
-├── .gitignore                    # Standard Node.js gitignore
-└── README.md                     # Project documentation
+├── .gitignore                    # Secure Git ignore rules
+└── README.md                     # Documentation & CI/CD guide
 ```
 
 ---

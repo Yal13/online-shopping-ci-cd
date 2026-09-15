@@ -1,97 +1,76 @@
-name: ShopEasy CI/CD Pipeline
+name: Continuous Integration
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
-  # 1. Code Quality & Syntax Validation
-  validate:
-    name: Code Validation & Quality Checks
+  ci:
+    name: ShopEasy CI Pipeline
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
+      # 1. Checkout repository
+      - name: 1. Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js Environment
+      # 2. Setup Node.js
+      - name: 2. Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Validate Backend Dependencies & Structure
+      # 3. Install backend dependencies
+      - name: 3. Install backend dependencies
         working-directory: ./backend
         run: |
-          if [ -f package.json ]; then
-            echo "Validating backend package.json..."
-            npm install --package-lock-only || true
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
           fi
 
-      - name: Validate JSON Datasets
+      # 4. Validate backend
+      - name: 4. Validate backend
         run: |
+          echo "Validating backend server syntax..."
+          node -c backend/server.js
+          echo "Validating product catalog JSON schema..."
           node -e "
             const fs = require('fs');
             const data = JSON.parse(fs.readFileSync('./backend/data/products.json', 'utf8'));
-            if (!Array.isArray(data) || data.length === 0) throw new Error('Invalid products dataset');
-            console.log('JSON validation passed! Products count: ' + data.length);
+            if (!Array.isArray(data) || data.length < 50) {
+              throw new Error('Invalid products dataset: Expected at least 50 products');
+            }
+            console.log('✓ Products dataset valid. Total products: ' + data.length);
           "
 
-  # 2. Automated Testing Stage
-  test:
-    name: Automated Unit & Integrity Tests
-    needs: validate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      # 5. Run backend tests
+      - name: 5. Run backend tests
+        working-directory: ./backend
+        run: npm test
 
-      - name: Verify Frontend Asset Integrity
+      # 6. Validate frontend
+      - name: 6. Validate frontend
         run: |
-          test -f frontend/index.html && echo "index.html exists"
-          test -f frontend/style.css && echo "style.css exists"
-          test -f frontend/app.js && echo "app.js exists"
+          echo "Checking essential frontend files..."
+          test -f frontend/index.html || { echo "Missing frontend/index.html"; exit 1; }
+          test -f frontend/style.css || { echo "Missing frontend/style.css"; exit 1; }
+          test -f frontend/app.js || { echo "Missing frontend/app.js"; exit 1; }
+          echo "✓ Frontend files verified successfully."
 
-      - name: Check for Clean Code & Formatting
+      # 7. Validate JavaScript
+      - name: 7. Validate JavaScript
         run: |
-          echo "Verifying code standards..."
-          grep -rn "TODO" frontend/ || echo "No blocking TODOs found."
+          echo "Checking frontend JavaScript syntax..."
+          node -c frontend/app.js
+          echo "✓ JavaScript syntax check passed."
 
-  # 3. Build & Static Analysis
-  build:
-    name: Static Bundle & Asset Packaging
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Package Release Assets
+      # 8. Final project check
+      - name: 8. Final project check
         run: |
-          mkdir -p dist
-          cp -r frontend/* dist/
-          echo "Production assets bundled successfully in dist/"
-
-  # 4. Containerization / Docker Build Verification
-  docker-build:
-    name: Container Build & Verification
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Verify Docker Readiness
-        run: |
-          echo "Verified Docker readiness for static and Node.js containers."
-
-  # 5. Deployment Staging
-  deploy:
-    name: Deployment Preview
-    needs: docker-build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    steps:
-      - name: Deploy Verification
-        run: |
-          echo "Deployment preview ready. Application is self-contained and ready for live hosting."
+          echo "=========================================="
+          echo "  ShopEasy CI Pipeline Passed Successfully!"
+          echo "=========================================="

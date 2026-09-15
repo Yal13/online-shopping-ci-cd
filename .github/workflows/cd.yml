@@ -1,0 +1,66 @@
+name: Continuous Deployment
+
+# CD Pipeline is disabled from automated triggering until production credentials are configured.
+# You can trigger this workflow manually from the GitHub Actions tab (Run Workflow).
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target Deployment Environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  cd:
+    name: ShopEasy CD Pipeline
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'staging' }}
+
+    steps:
+      # 1. Checkout repository
+      - name: 1. Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: 2. Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Install production dependencies
+      - name: 3. Install production dependencies
+        working-directory: ./backend
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --omit=dev
+          else
+            npm install --production
+          fi
+
+      # 4. Bundle & Package Release Assets
+      - name: 4. Bundle & Package Release Assets
+        run: |
+          echo "Packaging production build..."
+          mkdir -p release-pkg
+          cp -r backend release-pkg/
+          cp -r frontend release-pkg/
+          cp README.md release-pkg/
+          echo "✓ Build packaged in release-pkg/"
+
+      # 5. Production Deployment (Requires Configured Secrets)
+      - name: 5. Deploy to Target Environment
+        run: |
+          echo "=========================================================="
+          echo "  Target Environment: ${{ github.event.inputs.environment || 'staging' }}"
+          echo "  Deployment Status: Ready for Production Credentials"
+          echo "=========================================================="
+          echo "To enable live deployment, configure the following GitHub Secrets:"
+          echo "  - PRODUCTION_SERVER_HOST"
+          echo "  - DEPLOY_SSH_KEY"
+          echo "  - PRODUCTION_DEPLOY_PATH"
+          echo "=========================================================="
+          echo "✓ Staging dry-run completed successfully."

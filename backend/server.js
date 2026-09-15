@@ -1,6 +1,6 @@
 /**
- * Online Shopping - Express Backend Server
- * Simple, beginner-friendly REST API for College IBM Project
+ * ShopEasy - Express Backend Server
+ * REST API for ShopEasy Online Shopping Platform
  */
 
 const express = require('express');
@@ -105,11 +105,15 @@ app.get('*', (req, res) => {
 // ==========================================
 // Start Server
 // ==========================================
-app.listen(PORT, () => {
-  console.log(`=========================================`);
-  console.log(` Online Shopping Server is running!`);
-  console.log(` Local URL: http://localhost:${PORT}`);
-  console.log(` Health API: http://localhost:${PORT}/api/health`);
-  console.log(` Products API: http://localhost:${PORT}/api/products`);
-  console.log(`=========================================`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`=========================================`);
+    console.log(` ShopEasy API Server is running!`);
+    console.log(` Local URL: http://localhost:${PORT}`);
+    console.log(` Health API: http://localhost:${PORT}/api/health`);
+    console.log(` Products API: http://localhost:${PORT}/api/products`);
+    console.log(`=========================================`);
+  });
+}
+
+module.exports = app;
